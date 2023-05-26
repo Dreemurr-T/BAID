@@ -12,7 +12,7 @@ python download.py
 ```
 The images will be saved to `images/` folder.
 
-Ground-truth labels of the train set can be found in the `train` folder. However, since we are currently holding a competition in CGI2023, we cannot release the ground-truth labels of the test set right now. We apologize for the inconvenience. 
+Ground-truth labels of the train set can be found in the `train` folder. However, since we are currently holding a competition at [CGI-AIAA 2023](https://codalab.lisn.upsaclay.fr/competitions/12790), we cannot release the ground-truth labels of the test set right now. We apologize for the inconvenience. 
 
 ### License
 The dataset is licensed under [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
