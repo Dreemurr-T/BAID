@@ -168,7 +168,7 @@ class GAB(nn.Module):
                                     strict=False)
 
 
-class SAANDeep(nn.Module):
+class SAAN(nn.Module):
     def __init__(self, num_classes) -> None:
         super().__init__()
         self.GenAes = GAB()
