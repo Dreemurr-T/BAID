@@ -114,9 +114,12 @@ class SAB(nn.Module):
 
         self.vgg = VGG()
 
+        self.bn = nn.BatchNorm2d(num_features=512)
+
         self._init_weights()
 
     def forward(self, x):
+        # aligned to the output of VGG
         sty = self.vgg(x)
         aes = self.model.conv1(x)
         aes = self.model.bn1(aes)
@@ -127,10 +130,16 @@ class SAB(nn.Module):
         aes = self.model.layer2(aes)
 
         output = adain(aes, sty)
+        output = self.bn(output)
 
-        return output
+        return F.relu(output)
 
     def _init_weights(self):
+        for m in self.bn.modules():
+            if isinstance(m, nn.BatchNorm2d):
+                nn.init.normal_(m.weight.data, mean=1.0, std=0.02)
+                nn.init.constant_(m.bias.data, 0.0)
+
         self.model.load_state_dict(torch.load('checkpoint/ResNet_Pretrain/epoch_99.pth'),
                                     strict=False)
 
@@ -178,13 +187,14 @@ class SAAN(nn.Module):
 
         self.avg_pool = nn.AdaptiveAvgPool2d(output_size=(14, 14))
 
+        self.avg_pool2 = nn.AdaptiveAvgPool2d(output_size=(2, 2))
+
+        self.bn = nn.BatchNorm2d(num_features=1536)
+
         self.predictor = nn.Sequential(
-            nn.AdaptiveAvgPool2d(output_size=(2, 2)),
-            nn.BatchNorm2d(num_features=1536),
-            nn.Flatten(),
             nn.Linear(1536 * 4, 2048),
             nn.ReLU(inplace=True),
-            nn.Dropout(p=0.25),
+            nn.Dropout(p=0.5),
             nn.Linear(2048, num_classes),
             nn.Sigmoid(),
         )
@@ -200,61 +210,22 @@ class SAAN(nn.Module):
         all_aes = torch.cat((sty_aes, gen_aes), 1)
         all_aes = self.NLB(all_aes)
 
-        output = self.predictor(all_aes)
+        all_aes = self.avg_pool2(all_aes)
+        all_aes = self.bn(all_aes)
+
+        fc_input = torch.flatten(all_aes, start_dim=1)
+
+        output = self.predictor(fc_input)
 
         return output
 
     def _initial_weights(self):
-        for m in self.predictor.modules():
-            if isinstance(m, nn.Linear):
-                nn.init.normal_(m.weight.data, mean=0.0, std=0.02)
-                nn.init.constant_(m.bias.data, 0.0)
-            elif isinstance(m, nn.BatchNorm2d):
+        for m in self.bn.modules():
+            if isinstance(m, nn.BatchNorm2d):
                 nn.init.normal_(m.weight.data, mean=1.0, std=0.02)
                 nn.init.constant_(m.bias.data, 0.0)
 
-
-class SAAN_AVA(nn.Module):
-    def __init__(self, num_classes) -> None:
-        super().__init__()
-        self.GenAes = GAB()
-        self.StyAes = SAB()
-
-        self.NLB = NonLocalBlock(in_channels=1536)
-
-        self.avg_pool = nn.AdaptiveAvgPool2d(output_size=(14, 14))
-
-        self.predictor = nn.Sequential(
-            nn.AdaptiveAvgPool2d(output_size=(2, 2)),
-            nn.BatchNorm2d(num_features=1536),
-            nn.Flatten(),
-            nn.Linear(1536*4, 2048),
-            nn.ReLU(inplace=True),
-            nn.Dropout(p=0.25),
-            nn.Linear(2048, num_classes),
-            nn.Softmax(dim=1),
-        )
-
-        self._initial_weights()
-
-    def forward(self, x):
-        gen_aes = self.GenAes(x)
-        sty_aes = self.StyAes(x)
-
-        sty_aes = self.avg_pool(sty_aes)
-
-        all_aes = torch.cat((sty_aes, gen_aes), 1)
-        all_aes = self.NLB(all_aes)
-
-        output = self.predictor(all_aes)
-
-        return output
-
-    def _initial_weights(self):
         for m in self.predictor.modules():
             if isinstance(m, nn.Linear):
                 nn.init.normal_(m.weight.data, mean=0.0, std=0.02)
-                nn.init.constant_(m.bias.data, 0.0)
-            elif isinstance(m, nn.BatchNorm2d):
-                nn.init.normal_(m.weight.data, mean=1.0, std=0.02)
                 nn.init.constant_(m.bias.data, 0.0)
