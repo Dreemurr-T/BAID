@@ -23,7 +23,7 @@ def get_pics(urls, names):
 
 
 if __name__ == '__main__':
-    df = pd.read_csv('image_list.csv')
+    df = pd.read_csv('downloading_script/image_list.csv')
     urls = df['image_link'].values.tolist()
     names = df['image_name'].values.tolist()
 
