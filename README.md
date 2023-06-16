@@ -38,7 +38,24 @@ Other dependencies can be installed with:
 pip install -r requirements.txt
 ```
 
+#### Training
+- Download the BAID dataset and place the images in the `images/` folder
+- For training on BAID, use:
+```
+python train.py
+```
+Checkpoints will be save to `checkpoint/SAAN` folder.
 
+#### Testing
+
+For testing on BAID, use:
+```
+python test.py
+```
+Pretrained models and ground-truth labels of the test set will be released after the [CGI-AIAA 2023](https://codalab.lisn.upsaclay.fr/competitions/12790) challenge.
 
 ### License
 The dataset is licensed under [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+
+### Acknowledgement
+The code borrowed from [pytorch-AdaIN](https://github.com/naoto0804/pytorch-AdaIN) and [Non-local_pytorch](https://github.com/AlexHex7/Non-local_pytorch).
