@@ -114,8 +114,6 @@ class SAB(nn.Module):
 
         self.vgg = VGG()
 
-        self.bn = nn.BatchNorm2d(num_features=512)
-
         self._init_weights()
 
     def forward(self, x):
@@ -130,16 +128,10 @@ class SAB(nn.Module):
         aes = self.model.layer2(aes)
 
         output = adain(aes, sty)
-        output = self.bn(output)
 
         return F.relu(output)
 
     def _init_weights(self):
-        for m in self.bn.modules():
-            if isinstance(m, nn.BatchNorm2d):
-                nn.init.normal_(m.weight.data, mean=1.0, std=0.02)
-                nn.init.constant_(m.bias.data, 0.0)
-
         self.model.load_state_dict(torch.load('checkpoint/ResNet_Pretrain/epoch_99.pth'),
                                     strict=False)
 
