@@ -30,8 +30,13 @@ Ground-truth labels of the train set can be found in the `train` folder. However
 #### Requirements
 
 - Python >= 3.8
-- Pytorch >= 1.12.1
+- Pytorch >= 1.12.0
+- Torchvision >= 0.13.0
 
+Other dependencies can be installed with:
+```
+pip install -r requirements.txt
+```
 
 
 
