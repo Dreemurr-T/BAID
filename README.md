@@ -39,7 +39,7 @@ pip install -r requirements.txt
 ```
 
 #### Pretraining
-
+- Download the BAID dataset and place the images in the `images/` folder
 - Preprocess the data using:
 ```
 python pretraining_utils/pretrain_mani.py
@@ -52,8 +52,8 @@ python pretraining.py
 The whole pretraining process takes about 2 days on a single RTX3090. We provide our pretrained weights at `checkpoint/ResNet_Pretrain/epoch_99.pth`.
 
 #### Training
-- Download the BAID dataset and place the images in the `images/` folder
-- For training on BAID, use:
+
+For training on BAID, use:
 ```
 python train.py
 ```
