@@ -38,6 +38,19 @@ Other dependencies can be installed with:
 pip install -r requirements.txt
 ```
 
+#### Pretraining
+
+- Preprocess the data using:
+```
+python pretraining_utils/pretrain_mani.py
+```
+
+- Pretrain the ResNet50 backbone using:
+```
+python pretraining.py
+```
+The whole pretraining process takes about 2 days on a single RTX3090. We provide our pretrained weights at `checkpoint/ResNet_Pretrain/epoch_99.pth`.
+
 #### Training
 - Download the BAID dataset and place the images in the `images/` folder
 - For training on BAID, use:
@@ -59,3 +72,16 @@ The dataset is licensed under [CC BY-NC-ND 4.0](https://creativecommons.org/lice
 
 ### Acknowledgement
 The code borrowed from [pytorch-AdaIN](https://github.com/naoto0804/pytorch-AdaIN) and [Non-local_pytorch](https://github.com/AlexHex7/Non-local_pytorch).
+
+### Citation
+If you find our work useful, please cite our work as:
+```
+@InProceedings{Yi_2023_CVPR,
+    author    = {Yi, Ran and Tian, Haoyuan and Gu, Zhihao and Lai, Yu-Kun and Rosin, Paul L.},
+    title     = {Towards Artistic Image Aesthetics Assessment: A Large-Scale Dataset and a New Method},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2023},
+    pages     = {22388-22397}
+}
+```
