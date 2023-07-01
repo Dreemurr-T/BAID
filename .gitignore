@@ -1,3 +1,5 @@
-AVA/
-checkpoint/AVA/
 __pycache__/
+models/__pycache__/
+checkpoint/AVA/
+checkpoint/BAID/
+dataset/test_set_gt.csv

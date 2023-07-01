@@ -3,17 +3,15 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from data import BBDataset
-from torch.utils.data import DataLoader, random_split
-from model import SAAN
+from torch.utils.data import DataLoader
+from models.model import SAAN
 import torch.optim as optim
 from common import *
 import argparse
-import scipy
 
-dataset = BBDataset(file_dir='train', test=False)
-dataset_len = len(dataset)
-train_dataset, val_dataset = random_split(dataset, [dataset_len-3200, 3200])
 
+train_dataset = BBDataset(file_dir='dataset', type='train', test=False)
+val_dataset = BBDataset(file_dir='dataset', type='validation', test=True)
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -62,11 +60,13 @@ def train(args):
 
     optimizer = optim.Adam(model.parameters(), lr=args.lr, betas=(0.5, 0.999), weight_decay=5e-4)
 
-    train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, pin_memory=True, num_workers=4)
+    train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, pin_memory=True, num_workers=8)
     val_loader = DataLoader(val_dataset, batch_size=1, shuffle=False, pin_memory=True)
 
     for epoch in range(args.epoch):
         model.train()
+        epoch_loss = 0.0
+
         for step, train_data in enumerate(train_loader):
             optimizer.zero_grad()
             image = train_data[0].to(device)
@@ -77,6 +77,8 @@ def train(args):
 
             train_loss.backward()
             optimizer.step()
+
+            epoch_loss += train_loss.item()
 
             print("Epoch: %3d Step: %5d / %5d Train loss: %.8f" % (epoch, step, len(train_loader), train_loss.item()))
 

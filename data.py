@@ -58,7 +58,7 @@ class PretrainingDataset(Dataset):
 
 
 class BBDataset(Dataset):
-    def __init__(self, file_dir, test=False):
+    def __init__(self, file_dir='dataset', type='train', test=False):
         self.if_test = test
         self.train_transformer = transforms.Compose(
             [
@@ -83,7 +83,13 @@ class BBDataset(Dataset):
         self.pic_paths = []
         self.labels = []
 
-        DATA = pd.read_csv(os.path.join(file_dir, 'data.csv'))
+        if type == 'train':
+            DATA = pd.read_csv(os.path.join(file_dir, 'train_set.csv'))
+        elif type == 'validation':
+            DATA = pd.read_csv(os.path.join(file_dir, 'val_set.csv'))
+        elif type == 'test':
+            DATA = pd.read_csv(os.path.join(file_dir, 'test_set.csv'))
+
         labels = DATA['score'].values.tolist()
         pic_paths = DATA['image'].values.tolist()
         for i in tqdm(range(len(pic_paths))):

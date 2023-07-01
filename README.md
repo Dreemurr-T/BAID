@@ -24,7 +24,7 @@ Since it might be slow when downloading the images, we provide alternatives to o
 - Baidu Netdisk: [Link](https://pan.baidu.com/s/19pxr19neJ6Pmd0B6A_u55Q), Code: 9y91
 - Google Drive: Coming soon
 
-Ground-truth labels of the train set can be found in the `train` folder. However, since we are currently holding a competition at [CGI-AIAA 2023](https://codalab.lisn.upsaclay.fr/competitions/12790), we cannot release the ground-truth labels of the test set right now. We apologize for the inconvenience. 
+Ground-truth labels of the train set can be found in the `dataset` folder. However, since we are currently holding a competition at [CGI-AIAA 2023](https://codalab.lisn.upsaclay.fr/competitions/12790), we cannot release the ground-truth labels of the test set right now. We apologize for the inconvenience. 
 
 ### Code
 #### Requirements
@@ -75,7 +75,7 @@ The code borrowed from [pytorch-AdaIN](https://github.com/naoto0804/pytorch-AdaI
 
 ### Citation
 If you find our work useful, please cite our work as:
-```
+```bibtex
 @InProceedings{Yi_2023_CVPR,
     author    = {Yi, Ran and Tian, Haoyuan and Gu, Zhihao and Lai, Yu-Kun and Rosin, Paul L.},
     title     = {Towards Artistic Image Aesthetics Assessment: A Large-Scale Dataset and a New Method},
