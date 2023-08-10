@@ -49,7 +49,7 @@ python pretraining_utils/pretrain_mani.py
 ```
 python pretraining.py
 ```
-The whole pretraining process takes about 2 days on a single RTX3090. We provide our pretrained weights at `checkpoint/ResNet_Pretrain/epoch_99.pth`.
+The whole pretraining process takes about 2 days on a single RTX3090. We provide our pretrained weights at [Drive](https://drive.google.com/file/d/13aPiVT4xyu2w5VUwt6vDMJY1n2hXHKWc/view?usp=drive_link).
 
 #### Training
 
@@ -61,7 +61,9 @@ Checkpoints will be save to `checkpoint/SAAN` folder.
 
 #### Testing
 
-For testing on BAID, use:
+For testing on BAID, download the pretrained weights from [Drive](https://drive.google.com/file/d/1e2XPZjW92HFCUErNHzbmUtk204miAklS/view?usp=drive_link), place the checkpoint in `checkpoint/BAID`
+
+Then use:
 ```
 python test.py
 ```
