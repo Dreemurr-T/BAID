@@ -24,7 +24,7 @@ Since it might be slow when downloading the images, we provide alternatives to o
 - Baidu Netdisk: [Link](https://pan.baidu.com/s/19pxr19neJ6Pmd0B6A_u55Q), Code: 9y91
 - Google Drive: Coming soon
 
-Ground-truth labels of the train set can be found in the `dataset` folder. However, since we are currently holding a competition at [CGI-AIAA 2023](https://codalab.lisn.upsaclay.fr/competitions/12790), we cannot release the ground-truth labels of the test set right now. We apologize for the inconvenience. 
+Ground-truth labels of the train set can be found in the `dataset` folder.
 
 ### Code
 #### Requirements
@@ -65,7 +65,6 @@ For testing on BAID, use:
 ```
 python test.py
 ```
-Pretrained models and ground-truth labels of the test set will be released after the [CGI-AIAA 2023](https://codalab.lisn.upsaclay.fr/competitions/12790) challenge.
 
 ### License
 The dataset is licensed under [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
