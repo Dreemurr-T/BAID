@@ -24,7 +24,7 @@ Since it might be slow when downloading the images, we provide alternatives to o
 - Baidu Netdisk: [Link](https://pan.baidu.com/s/19pxr19neJ6Pmd0B6A_u55Q), Code: 9y91
 - Google Drive: Coming soon
 
-Ground-truth labels of the train set can be found in the `dataset` folder.
+Ground-truth labels of the dataset can be found in the `dataset` folder.
 
 ### Code
 #### Requirements
