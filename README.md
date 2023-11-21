@@ -13,7 +13,7 @@ cd BAID/
 pip install pandas
 pip install tqdm
 ```
-If you want to install in conda please use the following command in conda (Tested on Windows 10):
+- If you want to install in conda please use the following command in conda (Tested on Windows 10):
 ```
 conda env create -f BAID_env.yml
 ```
