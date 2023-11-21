@@ -13,6 +13,11 @@ cd BAID/
 pip install pandas
 pip install tqdm
 ```
+If you want to install in conda please use the following command in conda (Tested on Windows 10):
+```
+conda env create -f BAID_env.yml
+```
+
 - Download the dataset using:
 ```
 python downloading_script/download.py
@@ -32,6 +37,8 @@ Ground-truth labels of the dataset can be found in the `dataset` folder.
 - Python >= 3.8
 - Pytorch >= 1.12.0
 - Torchvision >= 0.13.0
+
+To determine how to install PyTorch along with CUDA, please refer to the [pytorch-documentation](https://pytorch.org/get-started/locally/).
 
 Other dependencies can be installed with:
 ```
